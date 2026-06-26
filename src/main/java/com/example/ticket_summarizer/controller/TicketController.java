@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
@@ -21,8 +22,8 @@ public class TicketController {
 
     @PostMapping
     public Ticket createTicket(@RequestBody TicketRequest request) {
-    return service.createTicket(request.getDescription());
-}
+        return service.createTicket(request.getDescription());
+    }
 
     @GetMapping
     public List<Ticket> getAllTickets() {
@@ -35,7 +36,8 @@ public class TicketController {
                 request.getDescription()
         );
     }
-        @GetMapping("/test")
+
+    @GetMapping("/test")
     public String test() {
         return "Controller Working";
     }

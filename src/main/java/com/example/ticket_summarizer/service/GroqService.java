@@ -24,18 +24,23 @@ public class GroqService {
 
         String url = "https://api.groq.com/openai/v1/chat/completions";
 
-        String requestBody = """
-        {
-         "model": "llama-3.3-70b-versatile",
-         "messages": [
-           {
-             "role": "user",
-             "content": "%s"
-           }
-         ]
-        }
-        """.formatted(prompt.replace("\"", "\\\""));
-
+       String requestBody = """
+{
+  "model": "llama-3.3-70b-versatile",
+  "messages": [
+    {
+      "role": "user",
+      "content": "%s"
+    }
+  ]
+}
+""".formatted(
+    prompt
+        .replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("\n", "\\n")
+        .replace("\r", "")
+);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiKey);
